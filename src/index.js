@@ -1,5 +1,4 @@
 import React, { Children, Component } from 'react';
-// import { unstable_deferredUpdates as deferredUpdates } from 'react-dom';
 import { unstable_scheduleWork as scheduleWork } from 'schedule';
 import PropTypes from 'prop-types';
 import { debounce, throttle } from 'lodash';
@@ -162,11 +161,12 @@ export default class LazyFastdom extends Component {
         }),
       );
       this.tick();
-    } else
+    } else {
       this.setState({ visible: true }, () => {
         const { onContentVisible } = this.props;
         if (onContentVisible) onContentVisible();
       });
+    }
 
     LazyFastdom.detachLazyFastdom(this);
   }
