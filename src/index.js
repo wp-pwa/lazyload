@@ -1,5 +1,4 @@
 import React, { Children, Component } from 'react';
-import { unstable_scheduleWork as scheduleWork } from 'schedule';
 import PropTypes from 'prop-types';
 import { debounce, throttle } from 'lodash';
 import inViewport from './utils/inViewport';
@@ -132,41 +131,16 @@ export default class LazyFastdom extends Component {
     inViewport(this.node, eventNode, offset).then(this.handleVisibility);
   }
 
-  tick() {
-    this.rafId = window.requestAnimationFrame(() => {
-      if (!this.finishedAsyncMount) {
-        if (this.props.async) this.tick();
-        else {
-          this.setState({ visible: true }, () => {
-            const { onContentVisible } = this.props;
-            if (onContentVisible) onContentVisible();
-          });
-        }
-      }
-    });
-  }
-
   handleVisibility(visible) {
     this.checkingVisibility = false;
 
     if (!visible || this.visible) return;
     this.visible = true;
 
-    if (this.props.async) {
-      scheduleWork(() =>
-        this.setState({ visible: true }, () => {
-          this.finishedAsyncMount = true;
-          const { onContentVisible } = this.props;
-          if (onContentVisible) onContentVisible();
-        }),
-      );
-      this.tick();
-    } else {
-      this.setState({ visible: true }, () => {
-        const { onContentVisible } = this.props;
-        if (onContentVisible) onContentVisible();
-      });
-    }
+    this.setState({ visible: true }, () => {
+      const { onContentVisible } = this.props;
+      if (onContentVisible) onContentVisible();
+    });
 
     LazyFastdom.detachLazyFastdom(this);
   }
@@ -196,7 +170,6 @@ LazyFastdom.propTypes = {
   children: PropTypes.node.isRequired,
   className: PropTypes.string,
   container: PropTypes.shape({}),
-  async: PropTypes.bool,
   elementType: PropTypes.string,
   height: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   offset: PropTypes.number,
@@ -219,7 +192,6 @@ LazyFastdom.defaultProps = {
   width: null,
   threshold: 0,
   onContentVisible: null,
-  async: false,
   elementType: 'div',
   offset: 0,
   offsetBottom: 0,
