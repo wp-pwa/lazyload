@@ -4,10 +4,15 @@
   "description": "Lazy load component for React, with fastdom",
   "main": "./lib/index.js",
   "scripts": {
-    "lib": "npm run clean && babel src -d lib",
+    "build": "npm run clean && babel src -d lib",
     "clean": "rm -rf lib && mkdir lib",
     "prepublish": "npm run lib",
-    "storybook": "start-storybook -p 9001"
+    "storybook": "start-storybook -p 9001",
+    "cz": "git-cz",
+    "lint-staged": "lint-staged",
+    "prepublishOnly": "npm run build",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release"
   },
   "author": "David Arenas (david@frontity.com)",
   "license": "MIT",
