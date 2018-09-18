@@ -6,7 +6,6 @@
   "scripts": {
     "build": "npm run clean && babel src -d lib",
     "clean": "rm -rf lib && mkdir lib",
-    "prepublish": "npm run lib",
     "storybook": "start-storybook -p 9001",
     "cz": "git-cz",
     "lint-staged": "lint-staged",
