@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-filename-extension */
 import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
 import { debounce, throttle } from 'lodash';
@@ -18,7 +19,8 @@ export default class LazyFastdom extends Component {
 
     const object = { handler, attached };
 
-    if (!LazyFastdom.groups.has(container)) LazyFastdom.groups.set(container, {});
+    if (!LazyFastdom.groups.has(container))
+      LazyFastdom.groups.set(container, {});
     LazyFastdom.groups.get(container)[key] = object;
 
     window.addEventListener('resize', handler);
@@ -50,7 +52,10 @@ export default class LazyFastdom extends Component {
     const key = LazyFastdom.getKey(lazy);
     const container = lazy.getEventNode();
 
-    if (!LazyFastdom.groups.has(container) || !LazyFastdom.groups.get(container)[key]) {
+    if (
+      !LazyFastdom.groups.has(container) ||
+      !LazyFastdom.groups.get(container)[key]
+    ) {
       LazyFastdom.createHandler(container, key, th, db);
     }
 
@@ -146,11 +151,20 @@ export default class LazyFastdom extends Component {
   }
 
   render() {
-    const { children, className, height, width, elementType: Element, placeholder } = this.props;
+    const {
+      children,
+      className,
+      height,
+      width,
+      elementType: Element,
+      placeholder,
+    } = this.props;
     const { visible } = this.state;
 
     const elStyles = { height, width };
-    const elClasses = `LazyLoad${visible ? ' is-visible' : ''}${className ? ` ${className}` : ''}`;
+    const elClasses = `LazyLoad${visible ? ' is-visible' : ''}${
+      className ? ` ${className}` : ''
+    }`;
 
     return (
       <Element
