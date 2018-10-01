@@ -1,3 +1,10 @@
+## [1.0.4](https://github.com/frontity/lazyload/compare/v1.0.3...v1.0.4) (2018-10-01)
+
+
+### Bug Fixes
+
+* **lodash:** install babel-plugin-lodash ([423d1bc](https://github.com/frontity/lazyload/commit/423d1bc))
+
 ## [1.0.3](https://github.com/frontity/lazyload/compare/v1.0.2...v1.0.3) (2018-10-01)
 
 
