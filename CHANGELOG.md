@@ -1,3 +1,10 @@
+## [1.0.5](https://github.com/frontity/lazyload/compare/v1.0.4...v1.0.5) (2018-10-01)
+
+
+### Bug Fixes
+
+* **babel:** fixes .babelrc ([98b699a](https://github.com/frontity/lazyload/commit/98b699a))
+
 ## [1.0.4](https://github.com/frontity/lazyload/compare/v1.0.3...v1.0.4) (2018-10-01)
 
 
