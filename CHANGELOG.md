@@ -1,3 +1,10 @@
+## [1.0.3](https://github.com/frontity/lazyload/compare/v1.0.2...v1.0.3) (2018-10-01)
+
+
+### Bug Fixes
+
+* **lodash:** fix lodash update ([ac49fb2](https://github.com/frontity/lazyload/commit/ac49fb2))
+
 ## [1.0.2](https://github.com/frontity/lazyload/compare/v1.0.1...v1.0.2) (2018-09-18)
 
 
