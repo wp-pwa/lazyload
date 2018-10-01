@@ -1,7 +1,4 @@
 {
-  "presets": [
-    "es2015",
-    "stage-0",
-    "react"
-  ]
+  "plugings": ["lodash"],
+  "presets": ["es2015", "stage-0", "react"]
 }
