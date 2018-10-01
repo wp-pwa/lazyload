@@ -130,6 +130,7 @@ export default class LazyFastdom extends Component {
 
   checkVisibility() {
     if (!this.mounted || this.checkingVisibility) return;
+
     const offset = this.getOffset();
     const eventNode = this.getEventNode();
     this.checkingVisibility = true;
