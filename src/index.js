@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
-import { debounce, throttle } from 'lodash';
+import debounce from 'lodash.debounce';
+import throttle from 'lodash.throttle';
 import inViewport from './utils/inViewport';
 
 export default class LazyFastdom extends Component {
