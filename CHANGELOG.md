@@ -1,3 +1,10 @@
+## [1.0.7](https://github.com/frontity/lazyload/compare/v1.0.6...v1.0.7) (2018-10-03)
+
+
+### Bug Fixes
+
+* **lodash:** changes lodash imports ([25cf88d](https://github.com/frontity/lazyload/commit/25cf88d))
+
 ## [1.0.6](https://github.com/frontity/lazyload/compare/v1.0.5...v1.0.6) (2018-10-03)
 
 
