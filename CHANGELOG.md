@@ -1,3 +1,10 @@
+## [1.0.6](https://github.com/frontity/lazyload/compare/v1.0.5...v1.0.6) (2018-10-03)
+
+
+### Bug Fixes
+
+* **lodash:** removes lodash-es and installs lodash ([0a6afec](https://github.com/frontity/lazyload/commit/0a6afec))
+
 ## [1.0.5](https://github.com/frontity/lazyload/compare/v1.0.4...v1.0.5) (2018-10-01)
 
 
