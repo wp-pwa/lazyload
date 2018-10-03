@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "fastdom": "^1.0.8",
-    "lodash-es": "^4.17.11"
+    "lodash": "^4.17.11"
   },
   "devDependencies": {
     "@commitlint/cli": "^7.1.2",
