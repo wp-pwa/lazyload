@@ -1,79 +1,12 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { Children, Component } from 'react';
 import PropTypes from 'prop-types';
-import debounce from 'lodash.debounce';
-import throttle from 'lodash.throttle';
+import PendingList from './utils/PendingList';
 import inViewport from './utils/inViewport';
 
+const pendingList = new PendingList();
+
 export default class LazyFastdom extends Component {
-  static groups = new Map();
-
-  static createHandler(container, key, th, db) {
-    if (th <= 0) return;
-    const handleAttached = () => {
-      const { attached } = LazyFastdom.groups.get(container)[key];
-      attached.forEach(lazy => lazy.checkVisibility());
-    };
-
-    const handler = (db ? debounce : throttle)(handleAttached, th);
-    const attached = [];
-
-    const object = { handler, attached };
-
-    if (!LazyFastdom.groups.has(container))
-      LazyFastdom.groups.set(container, {});
-    LazyFastdom.groups.get(container)[key] = object;
-
-    window.addEventListener('resize', handler);
-    container.addEventListener('scroll', handler);
-    container.addEventListener('touchmove', handler);
-    container.addEventListener('transitionend', handler);
-  }
-
-  static removeHandler(container, key) {
-    const { handler } = LazyFastdom.groups.get(container)[key];
-
-    handler.cancel();
-
-    window.removeEventListener('resize', handler);
-    container.removeEventListener('scroll', handler);
-    container.removeEventListener('touchmove', handler);
-    container.removeEventListener('transitionend', handler);
-
-    delete LazyFastdom.groups.get(container)[key];
-  }
-
-  static getKey(lazy) {
-    const { throttle: th, debounce: db } = lazy.props;
-    return `${th}_${db}`;
-  }
-
-  static attachLazyFastdom(lazy) {
-    const { throttle: th, debounce: db } = lazy.props;
-    const key = LazyFastdom.getKey(lazy);
-    const container = lazy.getEventNode();
-
-    if (
-      !LazyFastdom.groups.has(container) ||
-      !LazyFastdom.groups.get(container)[key]
-    ) {
-      LazyFastdom.createHandler(container, key, th, db);
-    }
-
-    LazyFastdom.groups.get(container)[key].attached.push(lazy);
-  }
-
-  static detachLazyFastdom(lazy) {
-    const key = LazyFastdom.getKey(lazy);
-    const container = lazy.getEventNode();
-    const obj = LazyFastdom.groups.get(container)[key];
-
-    if (!obj) return; // Do nothing. Handler does not exist.
-
-    obj.attached = obj.attached.filter(a => a !== lazy);
-    if (obj.attached.length === 0) LazyFastdom.removeHandler(container, key);
-  }
-
   constructor(props) {
     super(props);
 
@@ -89,7 +22,7 @@ export default class LazyFastdom extends Component {
 
   componentDidMount() {
     this.mounted = true;
-    LazyFastdom.attachLazyFastdom(this);
+    pendingList.add(this);
     this.checkVisibility();
   }
 
@@ -99,11 +32,10 @@ export default class LazyFastdom extends Component {
 
   componentWillUnmount() {
     this.mounted = false;
-    window.cancelAnimationFrame(this.rafId);
-    LazyFastdom.detachLazyFastdom(this);
+    pendingList.remove(this);
   }
 
-  getEventNode() {
+  getContainer() {
     return this.props.container || window;
   }
 
@@ -129,11 +61,13 @@ export default class LazyFastdom extends Component {
     };
   }
 
+  // This method is called asynchronously from a throttle function
+  // inside PendingList instance.
   checkVisibility() {
-    if (!this.mounted || this.checkingVisibility) return;
+    if (!this.node || !this.mounted || this.checkingVisibility) return;
 
     const offset = this.getOffset();
-    const eventNode = this.getEventNode();
+    const eventNode = this.getContainer();
     this.checkingVisibility = true;
     inViewport(this.node, eventNode, offset).then(this.handleVisibility);
   }
@@ -149,7 +83,7 @@ export default class LazyFastdom extends Component {
       if (onContentVisible) onContentVisible();
     });
 
-    LazyFastdom.detachLazyFastdom(this);
+    pendingList.remove(this);
   }
 
   render() {
