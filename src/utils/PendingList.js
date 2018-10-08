@@ -18,19 +18,17 @@ export default class PendingList {
     // Exits if throttle value is 0 (is this necessary?)
     if (lazy.props.throttle <= 0) return;
 
+    // Get group' by container
     let group = this.groups.get(container);
-
-    // Create 'group' by container
     if (!group) {
       group = {};
       this.groups.set(container, group);
     }
 
-    // 'checker' is a list of LazyFastdom instances and a
+    // Get 'checker' by generated key
+    // 'checker' has a list of LazyFastdom instances and a
     // function that checks visibility of those instances.
     let checker = group[key];
-
-    // Create 'checker' by generated key
     if (!checker) {
       const list = []; // list of lazy instances;
 
