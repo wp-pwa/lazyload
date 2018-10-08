@@ -22,7 +22,6 @@ export default class LazyFastdom extends Component {
 
   componentDidMount() {
     this.mounted = true;
-
     pendingList.add(this);
     this.checkVisibility();
   }
@@ -62,8 +61,10 @@ export default class LazyFastdom extends Component {
     };
   }
 
+  // This method is called asynchronously from a throttle function
+  // inside PendingList instance.
   checkVisibility() {
-    if (!this.mounted || this.checkingVisibility) return;
+    if (!this.node || !this.mounted || this.checkingVisibility) return;
 
     const offset = this.getOffset();
     const eventNode = this.getContainer();
