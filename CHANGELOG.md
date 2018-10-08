@@ -1,3 +1,11 @@
+## [1.0.8](https://github.com/frontity/lazyload/compare/v1.0.7...v1.0.8) (2018-10-08)
+
+
+### Bug Fixes
+
+* **index:** exit from checkVisibility when this.node is null ([e284385](https://github.com/frontity/lazyload/commit/e284385))
+* **pending-list:** do not override list in checker ([ded175a](https://github.com/frontity/lazyload/commit/ded175a))
+
 ## [1.0.7](https://github.com/frontity/lazyload/compare/v1.0.6...v1.0.7) (2018-10-03)
 
 
