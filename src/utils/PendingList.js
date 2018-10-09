@@ -1,4 +1,5 @@
-import { debounce, throttle } from 'lodash-es';
+import debounce from 'lodash.debounce';
+import throttle from 'lodash.throttle';
 
 export default class PendingList {
   static generateKey(lazy) {
