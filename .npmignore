@@ -2,6 +2,5 @@
 *.DS_Store
 .storybook
 .*
-src
 stories
 node_modules
