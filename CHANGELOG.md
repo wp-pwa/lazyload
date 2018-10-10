@@ -1,3 +1,10 @@
+## [1.0.10](https://github.com/frontity/lazyload/compare/v1.0.9...v1.0.10) (2018-10-10)
+
+
+### Bug Fixes
+
+* **code-style:** passes prettier ([fdf461d](https://github.com/frontity/lazyload/commit/fdf461d))
+
 ## [1.0.9](https://github.com/frontity/lazyload/compare/v1.0.8...v1.0.9) (2018-10-09)
 
 
