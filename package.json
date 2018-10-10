@@ -16,6 +16,9 @@
     "travis-deploy-once": "travis-deploy-once",
     "semantic-release": "semantic-release"
   },
+  "publishConfig": {
+    "tag": "next"
+  },
   "author": "David Arenas (david@frontity.com)",
   "license": "MIT",
   "repository": {
