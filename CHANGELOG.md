@@ -1,3 +1,10 @@
+## [1.0.11](https://github.com/frontity/lazyload/compare/v1.0.10...v1.0.11) (2018-10-16)
+
+
+### Bug Fixes
+
+* **index:** prevent removing others when using 'remove' twice ([0f2594f](https://github.com/frontity/lazyload/commit/0f2594f))
+
 ## [1.0.10](https://github.com/frontity/lazyload/compare/v1.0.9...v1.0.10) (2018-10-10)
 
 
