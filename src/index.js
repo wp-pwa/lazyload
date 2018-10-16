@@ -32,7 +32,7 @@ export default class LazyFastdom extends Component {
 
   componentWillUnmount() {
     this.mounted = false;
-    pendingList.remove(this);
+    if (!this.visible) pendingList.remove(this);
   }
 
   getContainer() {
@@ -77,13 +77,12 @@ export default class LazyFastdom extends Component {
 
     if (!visible || this.visible) return;
     this.visible = true;
+    pendingList.remove(this);
 
     this.setState({ visible: true }, () => {
       const { onContentVisible } = this.props;
       if (onContentVisible) onContentVisible();
     });
-
-    pendingList.remove(this);
   }
 
   render() {

@@ -66,8 +66,11 @@ export default class PendingList {
 
     const { func, list } = checker;
 
-    // Remove this lazy instance from checker
+    // Get index of lazy instance
     const index = list.indexOf(lazy);
+    if (index === -1) return; // not in the list -> already removed!
+
+    // Remove this lazy instance from checker
     list.splice(index, 1);
 
     if (!list.length) {
