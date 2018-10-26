@@ -1,3 +1,10 @@
+## [1.0.12](https://github.com/frontity/lazyload/compare/v1.0.11...v1.0.12) (2018-10-26)
+
+
+### Bug Fixes
+
+* **semantic-release:** update semantic-release and dependencies ([08b9254](https://github.com/frontity/lazyload/commit/08b9254))
+
 ## [1.0.11](https://github.com/frontity/lazyload/compare/v1.0.10...v1.0.11) (2018-10-16)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "@frontity/lazyload",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "Lazy load component for React, with fastdom",
   "main": "./lib/index.js",
   "scripts": {
